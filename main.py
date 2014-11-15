@@ -11,6 +11,21 @@ def index():
 	logging.info('index page')
    	return render_template('index.html')
 
+@app.route("/upload")
+def upload():
+	logging.info('upload page')
+   	return render_template('upload.html')
+
+@app.route("/camera")
+def camera():
+	logging.info('camera page')
+   	return render_template('camera.html')
+
+@app.route("/profile")
+def profile():
+	logging.info('profile page')
+   	return render_template('profile.html')
+
 @app.route('/_add_numbers')
 def add_numbers():
 	"""Add two numbers server side, ridiculous but well..."""

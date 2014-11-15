@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <!-- Header -->
+
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Add a new offer here </span>
+                        <hr class="star-light">
+                    </div>
+                      <input type="file" accept="image/*;capture=camera"> 
+                    <section class="entry" style="padding:20px">
+                      <div class="latest">
+                        <div class="menu-save">
+                          <span class="command">save</span>
+                        </div>
+                        <img />
+                      </div>
+                    </section>
+                </div>
+
+                <div class="col-lg-12">
+                <form name="sentMessage" id="contactForm" novalidate>
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Name of the product</label>
+                        <input type="text" class="form-control" placeholder="Name of the product" id="time" required data-validation-required-message="Name of the product">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Choose a category</label>
+                        <input type="text" class="form-control" placeholder="Choose a category" id="time" required data-validation-required-message="Choose a category" style=":-webkit-input-placeholder { color: white; }">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Offer Price</label>
+                        <input type="text" class="form-control" placeholder="Offer Price" id="time" required data-validation-required-message="Offer Price">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Usual Price</label>
+                        <input type="text" class="form-control" placeholder="Usual Price" id="time" required data-validation-required-message="Usual Price">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Date of Expiry</label>
+                        <input type="text" class="form-control" placeholder="Date of Expiry" id="time" required data-validation-required-message="Date of Expiry">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox"> Be Awesome, give free food to <a href="http://www.foodbank.sg/" style="color:#FFFFFF;text-decoration:underline;">FoodBank</a> <i class="fa fa-smile-o"></i>
+                        </label>
+                    </div>
+
+
+                </form>
+                </div>
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <a href="#portfolioModal1" id="b-success" class="btn btn-lg btn-outline" data-toggle="modal">
+                        <i class="fa fa-thumbs-o-up"></i> Submit  
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </header>
+
+{% endblock %}

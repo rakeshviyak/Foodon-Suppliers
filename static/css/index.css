@@ -1,0 +1,33 @@
+
+/* input.hidden { left: -3000px; position: absolute; } */
+.latest { width: 275px; height: 275px; 
+          position: relative; background: black; cursor: pointer; }
+.latest img { width: 100%; height: 100%; }
+section { width: 50%; float: left; }
+
+.album header { margin: 0 0 1em; }
+.album h1 { display: inline; }
+.photos { clear: left; }
+.photo { position: relative; display: block; float: left; 
+         width: 125px; height: 125px; margin: 0 5px 80px;
+ }
+.photo img { width: 100%; height: 100%; 
+  -webkit-box-reflect: below 5px -webkit-linear-gradient(top, transparent, transparent 50px, rgba(255, 255, 255, 0.3)); 
+}
+
+.menu-save { display: none; z-index: 10; 
+        position: absolute; left: 0; top: 0; width: 100%;
+        background: rgba(20%,20%,20%,0.5);
+        padding-top: 0.5em;
+        height: 2em;
+        text-align: right; 
+        font-weight: bold;
+     }
+.command { text-decoration: underline; font-size: small; cursor: pointer; }
+.menu-save .command {
+  cursor: pointer;
+  margin-right: 0.3em;
+  opacity: 0.9;
+  z-index: 20;
+}
+

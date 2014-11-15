@@ -1,166 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
 
-<head>
+{% block body %}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Lets go out</title>
-
-    <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
-    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom CSS -->
-    <link href="/static/css/freelancer.css" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="/static/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript">
-        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    </script>
-</head>
-
-<body id="page-top" class="index">
-
-    <!-- jQuery Version 1.11.0 -->
-    <script src="/static/js/jquery-1.11.0.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/static/js/bootstrap.min.js"></script>
-
-<!--     Plugin JavaScript 
-    <script src="/static/js/cbpAnimatedHeader.js"></script>
- -->
-    <!-- Contact Form JavaScript -->
-    <script src="/static/js/jqBootstrapValidation.js"></script>
-    <script src="/static/js/contact_me.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/static/js/freelancer.js"></script>
-
-    <!-- Header -->
-    <header>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive" src="/static/img/portfolio/cake1.png" alt="">
-                    <div class="intro-text">
-                        <span class="name">Hey, u !! </span>
-                        <hr class="star-light">
-                        <span class="skills">Do u wanna have dinner together ? </span>
+                    <img class="img-responsive" src="/static/img/cans.jpg" alt="">
+                    <div class="pic-box-text" style="margin-bottom: 12px;">
+                        <span class="usual-price">S$5 </span>
+                        <span class="offer-price">S$2 </span>
+                        <span class="doe">2 more days </span>
                     </div>
                 </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <a href="#portfolioModal1" id="b-success" class="btn btn-lg btn-outline" data-toggle="modal">
-                        <i class="fa fa-thumbs-o-up"></i> Lets do it  
-                    </a>
-                </div>
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-
-                    <a href="#portfolioModal2" id="b-reject" class="btn btn-lg btn-outline-reject" data-toggle="modal">
-                        <i class="fa fa-thumbs-o-down"></i> No way :(
-                    </a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="/static/img/beer.jpg" alt="">
+                    <div class="pic-box-text" style="margin-bottom: 12px;">
+                        <span class="usual-price">S$4 </span>
+                        <span class="offer-price">S$1 </span>
+                        <span class="doe">1 more days </span>
                     </div>
                 </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Great !!!!!! </h2>
-                            <hr class="star-primary">
-                            <img src="/static/img/portfolio/circus.png" class="img-responsive img-centered" alt="">
-                            <p>Lets go on sunday evening (10/12) <i class="fa fa-smile-o"></i>  </p>
-                            <p><form name="sentMessage" id="contactForm" novalidate>
-                            <div class="form-group floating-label-form-group controls">
-                                <label>or Propose a new time</label>
-                                <input type="text" class="form-control" placeholder="or propose a new time here" id="time" required data-validation-required-message="or Propose a new time">
-                                <p class="help-block text-danger"></p>
-                        </div></form></p>
-                                <button type="button" class="btn btn-default" id="b-inform"><i class="fa fa-share"></i> Inform me </button>
-
-                        </div>
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="/static/img/apples.jpg" alt="">
+                    <div class="pic-box-text" style="margin-bottom: 12px;">
+                        <span class="usual-price">S$3 </span>
+                        <span class="offer-price">S$1 </span>
+                        <span class="doe">2 more days </span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="/static/img/chicken.jpg" alt="">
+                    <div class="pic-box-text" style="margin-bottom: 12px;">
+                        <span class="usual-price">S$8 </span>
+                        <span class="offer-price">S$3 </span>
+                        <span class="doe">1 more days </span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="/static/img/vege.jpg" alt="">
+                    <div class="pic-box-text" style="margin-bottom: 12px;">
+                        <span class="usual-price">S$3 </span>
+                        <span class="offer-price">S$0.5 </span>
+                        <span class="doe">2 more days </span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Oh No <i class="fa fa-meh-o"></i></h2>
-                            <hr class="star-primary">
-                            <img src="/static/img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>But, I have already booked for the horse and carriage !!   </p>
- 
-                             <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <script type="text/javascript">
-            $(function() {
-                var submit_form = function(e) {
-                $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-                a: $('#time').val(),
-                }, function(data) {
-                    console.log(data.result);
-                    alert("Sent the reply. See u!!");
-                });
-                return false;
-                };
-                $('#b-inform').bind('click', submit_form);
-            });
-    </script>
-    <script>
-          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+{% endblock %}
 
-          ga('create', 'UA-55620982-1', 'auto');
-          ga('send', 'pageview');
-
-    </script>
-
-
-</body>
-
-</html>
