@@ -5,6 +5,9 @@ api_version: 1
 threadsafe: yes
 
 handlers:
+  # Endpoints handler
+- url: /_ah/spi/.*
+  script: dbapi.APPLICATION
 - url: .*
   script: main.app
 
@@ -13,3 +16,7 @@ libraries:
   version: "2.6"
 - name: markupsafe
   version: "0.15"
+- name: pycrypto
+  version: latest
+- name: endpoints
+  version: 1.0

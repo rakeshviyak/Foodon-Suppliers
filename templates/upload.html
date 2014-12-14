@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <!-- Header -->
-
-
-    <header>
-        <div class="container">
+<header>
+    
+        <div class="container" style="margin-top:40px;">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-text">
-                        <span class="name">Add a new offer here </span>
+                        <span class="name">Add Products </span>
                         <hr class="star-light">
                     </div>
-                      <input type="file" accept="image/*;capture=camera"> 
+<!--                       <input type="file" accept="image/*;capture=camera"> 
                     <section class="entry" style="padding:20px">
                       <div class="latest">
                         <div class="menu-save">
@@ -20,34 +18,36 @@
                         </div>
                         <img />
                       </div>
-                    </section>
+                    </section> -->
+
+                    <input type="file" id="productimg" name="productimg">
                 </div>
 
                 <div class="col-lg-12">
                 <form name="sentMessage" id="contactForm" novalidate>
                     <div class="form-group floating-label-form-group controls">
                         <label>Name of the product</label>
-                        <input type="text" class="form-control" placeholder="Name of the product" id="time" required data-validation-required-message="Name of the product">
+                        <input type="text" class="form-control" placeholder="Name of the product" id="productname" required data-validation-required-message="Name of the product">
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group floating-label-form-group controls">
                         <label>Choose a category</label>
-                        <input type="text" class="form-control" placeholder="Choose a category" id="time" required data-validation-required-message="Choose a category" style=":-webkit-input-placeholder { color: white; }">
+                        <input type="text" class="form-control" placeholder="Choose a category" id="category" required data-validation-required-message="Choose a category" style=":-webkit-input-placeholder { color: white; }">
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group floating-label-form-group controls">
                         <label>Offer Price</label>
-                        <input type="text" class="form-control" placeholder="Offer Price" id="time" required data-validation-required-message="Offer Price">
+                        <input type="number" class="form-control" placeholder="Offer Price" id="offerprice" required data-validation-required-message="Offer Price">
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group floating-label-form-group controls">
                         <label>Usual Price</label>
-                        <input type="text" class="form-control" placeholder="Usual Price" id="time" required data-validation-required-message="Usual Price">
+                        <input type="number" class="form-control" placeholder="Usual Price" id="usualprice" required data-validation-required-message="Usual Price">
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="form-group floating-label-form-group controls">
                         <label>Date of Expiry</label>
-                        <input type="text" class="form-control" placeholder="Date of Expiry" id="time" required data-validation-required-message="Date of Expiry">
+                        <input type="date" class="form-control" placeholder="Date of Expiry" id="doe" required data-validation-required-message="Date of Expiry">
                         <p class="help-block text-danger"></p>
                     </div>
                     <div class="checkbox">
@@ -61,12 +61,22 @@
                 </div>
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <a href="#portfolioModal1" id="b-success" class="btn btn-lg btn-outline" data-toggle="modal">
-                        <i class="fa fa-thumbs-o-up"></i> Submit  
+                        Submit  
                     </a>
                 </div>
-                
+
+
+
+
+                <output id="outputLog"></output>
+    <script>
+        function init() {
+            google.appengine.samples.hello.init('//' + window.location.host + '/_ah/api');
+        }
+    </script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
             </div>
         </div>
-    </header>
+</header><!-- /header -->
 
 {% endblock %}
