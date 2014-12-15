@@ -520,3 +520,7 @@ section { width: 50%; float: left; }
   opacity: 0.9;
   z-index: 20;
 }
+
+.p-btn{
+    color: black;
+}

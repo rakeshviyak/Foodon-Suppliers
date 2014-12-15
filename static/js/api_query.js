@@ -85,10 +85,12 @@ google.appengine.samples.hello.auth = function() {
  * Prints a greeting to the greeting log.
  * param {Object} greeting Greeting to print.
  */
-google.appengine.samples.hello.print = function(greeting) {
+google.appengine.samples.hello.print = function(model) {
   var element = document.createElement('div');
   element.classList.add('row');
-  element.innerHTML = greeting.productname;
+  // element.innerHTML = model.productname;
+  element.innerHTML = '<img src="data:image/png;base64,'+model.productimg+'"/>';
+  // element.innerHTML = '<img src="'+model.productimg+'"/>';
   document.querySelector('#outputLog').appendChild(element);
 };
 
@@ -97,7 +99,7 @@ google.appengine.samples.hello.print = function(greeting) {
  * @param {string} id ID of the greeting.
  */
 google.appengine.samples.hello.getProductByID = function(id) {
-  gapi.client.myapi.mymodel.getById({'id': id}).execute(
+  gapi.client.myapi.mymodel.getByID({'id': id}).execute(
       function(resp) {
         if (!resp.code) {
           google.appengine.samples.hello.print(resp);
@@ -128,8 +130,8 @@ google.appengine.samples.hello.insert = function(productname,category,offerprice
       'category':category,
       'offerprice':offerprice,
       'usualprice':usualprice,
-      'doe':doe
-      // 'productimg':productimg
+      'doe':doe,
+      'productimg':productimg
     }).execute(function(resp) {
       if (!resp.code) {
         google.appengine.samples.hello.print(resp);
@@ -138,16 +140,24 @@ google.appengine.samples.hello.insert = function(productname,category,offerprice
 };
 
 
+function converbtoa(){
+  file=document.querySelector("#productimg").files[0];
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var rawData=reader.result;
+  }
+  reader.removeAttr(file);
+}
 
 /**
  * Enables the button callbacks in the UI.
  */
 google.appengine.samples.hello.enableButtons = function() {
-  // var getProductByID = document.querySelector('#offerprice');
-  // getProductByID.addEventListener('click', function(e) {
-  //   google.appengine.samples.hello.getProductByID(
-  //       document.querySelector('#offerprice').value);
-  // });
+  var getProductByID = document.querySelector('#a-success');
+  getProductByID.addEventListener('click', function(e) {
+    google.appengine.samples.hello.getProductByID(
+        document.querySelector('#offerprice').value);
+  });
 
   var insertProduct = document.querySelector('#b-success');
   insertProduct.addEventListener('click',function(){
@@ -157,16 +167,31 @@ google.appengine.samples.hello.enableButtons = function() {
       var usualprice=document.querySelector('#usualprice').value;
       var doe=document.querySelector('#doe').value;
 
+      // file=document.querySelector('#productimg').files[0];
+      // var reader = new FileReader();
+      // reader.onload = (function(theFile){
+      //     var fileName = theFile.name;
+      //     productimg=reader.result;
+      //     return function(e){
+      //         console.log(fileName);
+      //     };
+      // })(file);   
+      // reader.readAsDataURL(file);
+      // file=document.querySelector("#productimg").files[0];
+
       // var reader = new FileReader();
 
       // reader.onload = function(e) {
       //   var rawData = reader.result;
       // }
-      // file=document.querySelector("#productimg").files[0];
       
-      // var productimg=reader.readAsBinaryString(file);
 
-      google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe)
+      // reader.readAsBinaryString(file);
+      p=productimage;
+      // // convert to base 64 to send via endpoints
+      // productimg=btoa(reader.result);
+
+      google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe,p)
     });
 
   var signinButton = document.querySelector('#signinButton');
@@ -194,3 +219,47 @@ google.appengine.samples.hello.init = function(apiRoot) {
   gapi.client.load('oauth2', 'v2', callback);
 };
 
+var productimage;
+window.onload = function(){
+        
+    //Check File API support
+    if(window.File && window.FileList && window.FileReader)
+    {
+        var filesInput = document.getElementById("productimg");
+        
+        filesInput.addEventListener("change", function(event){
+            
+            var files = event.target.files; //FileList object
+            var output = document.getElementById("result");
+            
+            file=files[0];
+
+            //Only pics
+            // if(!file.type.match('image'))
+            //   continue;
+                
+            var picReader = new FileReader();
+                
+            picReader.addEventListener("load",function(event){
+                    
+              var picFile = event.target;
+            
+              productimage= btoa(picFile.result);        
+            // var div = document.createElement("div");
+                    
+            // div.innerHTML = "<img class='thumbnail' src='" + picFile.result + "'" +
+            //                 "title='" + picFile.name + "'/>";
+                    
+                    // output.insertBefore(div,null);            
+                
+            });
+                
+                 //Read the image
+                picReader.readAsBinaryString(file);
+            });   
+    }
+    else
+    {
+        console.log("Your browser does not support File API");
+    }
+}

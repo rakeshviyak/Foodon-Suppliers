@@ -15,13 +15,13 @@ ANDROID_AUDIENCE = WEB_CLIENT_ID
 
 class MyModel(EndpointsModel):
     _message_fields_schema = (
-        'id', 'productname', 'category', 'offerprice', 'usualprice', 'doe', 'owner')
+        'id', 'productname', 'category', 'offerprice', 'usualprice', 'doe', 'owner', 'productimg')
     productname = ndb.StringProperty()
     category = ndb.StringProperty()
     offerprice = ndb.FloatProperty()
     usualprice = ndb.FloatProperty()
     doe = EndpointsDateProperty()
-    # productimg = ndb.BlobProperty()
+    productimg = ndb.BlobProperty()
     owner = ndb.UserProperty()
     created = ndb.DateTimeProperty(auto_now_add=True)
     modified = ndb.DateTimeProperty(auto_now=True)
@@ -40,6 +40,7 @@ class MyApi(remote.Service):
                     name='mymodel.insert')
     def MyModelInsert(self, my_model):
         logging.info(endpoints.get_current_user())
+        logging.info(my_model)
         my_model.owner = endpoints.get_current_user()
         my_model.put()
         return my_model
@@ -53,9 +54,10 @@ class MyApi(remote.Service):
 
     @MyModel.method(request_fields=('id',),
                     path='mymodel/{id}', http_method='GET', name='mymodel.getByID')
-    def MyModelGetById(self, my_model):
+    def MyModelGetByID(self, my_model):
         if not my_model.from_datastore:
             raise endpoints.NotFoundException('MyModel not found.')
+        logging.info(my_model)
         return my_model
 
 
