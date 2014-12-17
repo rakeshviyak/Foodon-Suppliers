@@ -7,10 +7,7 @@ from endpoints_proto_datastore.ndb import EndpointsModel, EndpointsDateProperty
 
 import logging
 
-WEB_CLIENT_ID = '935842685891-akaa53kqu9v86pcnh5kn4j41kaltnd18.apps.googleusercontent.com'
-ANDROID_CLIENT_ID = 'replace this with your Android client ID'
-IOS_CLIENT_ID = 'replace this with your iOS client ID'
-ANDROID_AUDIENCE = WEB_CLIENT_ID
+import secrets
 
 
 class MyModel(EndpointsModel):
@@ -29,11 +26,7 @@ class MyModel(EndpointsModel):
 
 # Use of this decorator is the same for APIs created with or without
 # endpoints-proto-datastore.
-@endpoints.api(allowed_client_ids=[WEB_CLIENT_ID, ANDROID_CLIENT_ID,
-                                   IOS_CLIENT_ID, endpoints.API_EXPLORER_CLIENT_ID],
-               audiences=[ANDROID_AUDIENCE],
-               scopes=[endpoints.EMAIL_SCOPE],
-               name='myapi', version='v1', description='My Little API')
+@endpoints.api(name='myapi', version='v1', description='My Little API')
 class MyApi(remote.Service):
 
     @MyModel.method(path='mymodel', http_method='POST',

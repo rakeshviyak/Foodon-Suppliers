@@ -1,21 +1,23 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, render_template
 import logging
-# from google.appengine.api import mail
+
+import secrets
 
 
 app = Flask(__name__)
+Client_ID = secrets.WEB_CLIENT_ID
 
 
 @app.route("/")
 def index():
     logging.info('index page')
-    return render_template('index.html')
+    return render_template('index.html', Client_ID=Client_ID)
 
 
 @app.route("/upload")
 def upload():
-    logging.info('upload page')
-    return render_template('upload.html')
+    logging.info('upload page %s' % Client_ID)
+    return render_template('upload.html', Client_ID=Client_ID)
 
 
 @app.route("/camera")
@@ -28,20 +30,6 @@ def camera():
 def profile():
     logging.info('profile page')
     return render_template('profile.html')
-
-
-@app.route('/_add_numbers')
-def add_numbers():
-    """Add two numbers server side, ridiculous but well..."""
-    a = request.args.get('a', 0, type=str)
-    logging.info("success " + a)
-    result = jsonify(result=("success" + a))
-    # mail.send_mail(sender="Lets go for dinner.com Support <rakeshviyak@gmail.com>",
-    #                to="rakeshviyak@gmail.com",
-    #                subject="sucess" + a,
-    #                body="testdfsas")
-
-    return result
 
 
 @app.errorhandler(404)

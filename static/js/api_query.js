@@ -4,43 +4,41 @@
  * Hello Endpoints API.
  */
 
-/** google global namespace for Google projects. */
-var google = google || {};
+ /** google global namespace for Google projects. */
+ var google = google || {};
 
-/** appengine namespace for Google Developer Relations projects. */
-google.appengine = google.appengine || {};
+ /** appengine namespace for Google Developer Relations projects. */
+ google.appengine = google.appengine || {};
 
-/** samples namespace for App Engine sample code. */
-google.appengine.samples = google.appengine.samples || {};
+ /** samples namespace for App Engine sample code. */
+ google.appengine.samples = google.appengine.samples || {};
 
-/** hello namespace for this sample. */
-google.appengine.samples.hello = google.appengine.samples.hello || {};
+ /** hello namespace for this sample. */
+ google.appengine.samples.hello = google.appengine.samples.hello || {};
 
 
 /**
  * Client ID of the application (from the APIs Console).
  * @type {string}
- */
-google.appengine.samples.hello.CLIENT_ID =
-    '935842685891-akaa53kqu9v86pcnh5kn4j41kaltnd18.apps.googleusercontent.com';
-
+ // moved to base.html
+ // google.appengine.samples.hello.CLIENT_ID = '{{ Client_ID }}';
 /**
  * Scopes used by the application.
  * @type {string}
  */
-google.appengine.samples.hello.SCOPES =
-    'https://www.googleapis.com/auth/userinfo.email';
+ google.appengine.samples.hello.SCOPES =
+ 'https://www.googleapis.com/auth/userinfo.email';
 
 /**
  * Whether or not the user is signed in.
  * @type {boolean}
  */
-google.appengine.samples.hello.signedIn = false;
+ google.appengine.samples.hello.signedIn = false;
 
 /**
  * Loads the application UI after the user has completed auth.
  */
-google.appengine.samples.hello.userAuthed = function() {
+ google.appengine.samples.hello.userAuthed = function () {
   var request = gapi.client.oauth2.userinfo.get().execute(function(resp) {
     if (!resp.code) {
       google.appengine.samples.hello.signedIn = true;
@@ -55,10 +53,10 @@ google.appengine.samples.hello.userAuthed = function() {
  * @param {boolean} mode Whether or not to use immediate mode.
  * @param {Function} callback Callback to call on completion.
  */
-google.appengine.samples.hello.signin = function(mode, callback) {
+ google.appengine.samples.hello.signin = function (mode, callback) {
   gapi.auth.authorize({client_id: google.appengine.samples.hello.CLIENT_ID,
-      scope: google.appengine.samples.hello.SCOPES, immediate: mode},
-      callback);
+    scope: google.appengine.samples.hello.SCOPES, immediate: mode},
+    callback);
 };
 
 
@@ -67,10 +65,10 @@ google.appengine.samples.hello.signin = function(mode, callback) {
 /**
  * Presents the user with the authorization popup.
  */
-google.appengine.samples.hello.auth = function() {
+ google.appengine.samples.hello.auth = function () {
   if (!google.appengine.samples.hello.signedIn) {
     google.appengine.samples.hello.signin(false,
-        google.appengine.samples.hello.userAuthed);
+      google.appengine.samples.hello.userAuthed);
   } else {
     google.appengine.samples.hello.signedIn = false;
     document.querySelector('#signinButton').textContent = 'Sign in';
@@ -85,134 +83,118 @@ google.appengine.samples.hello.auth = function() {
  * Prints a greeting to the greeting log.
  * param {Object} greeting Greeting to print.
  */
-google.appengine.samples.hello.print = function(model) {
+ google.appengine.samples.hello.print = function (model) {
   var element = document.createElement('div');
-  element.classList.add('row');
-  // element.innerHTML = model.productname;
-  element.innerHTML = '<img src="data:image/png;base64,'+model.productimg+'"/>';
-  // element.innerHTML = '<img src="'+model.productimg+'"/>';
+  // element.classList.add('row');
+  // element.innerHTML = '<img src="data:image/png;base64,' + model.productimg + '"/>';
+  element.classList.add('col-lg-4');
+  element.innerHTML='<img class="img-responsive" src="data:image/png;base64, ' + model.productimg + '" alt=""><div class="pic-box-text" style="margin-bottom: 12px;"><span class="usual-price">S$' + model.usualprice + '</span><span class="offer-price">S$' + model.offerprice + '</span><span class="doe">' + model.doe + ' </span></div>';
   document.querySelector('#outputLog').appendChild(element);
+
 };
 
 /**
  * Gets a numbered greeting via the API.
  * @param {string} id ID of the greeting.
  */
-google.appengine.samples.hello.getProductByID = function(id) {
+ google.appengine.samples.hello.getProductByID = function (id) {
   gapi.client.myapi.mymodel.getByID({'id': id}).execute(
-      function(resp) {
-        if (!resp.code) {
-          google.appengine.samples.hello.print(resp);
-        }
-      });
-};
-
-/**
- * Lists greetings via the API.
- */
-google.appengine.samples.hello.productList = function() {
-  gapi.client.myapi.mymodel.list().execute(
-      function(resp) {
-        if (!resp.code) {
-          resp.items = resp.items || [];
-          for (var i = 0; i < resp.items.length; i++) {
-            console.log(resp.items[i]);
-            google.appengine.samples.hello.print(resp.items[i]);
-          }
-        }
-      });
-};
-
-// myapi.mymodel.insert
-google.appengine.samples.hello.insert = function(productname,category,offerprice,usualprice,doe,productimg) {
-  gapi.client.myapi.mymodel.insert({
-      'productname':productname,
-      'category':category,
-      'offerprice':offerprice,
-      'usualprice':usualprice,
-      'doe':doe,
-      'productimg':productimg
-    }).execute(function(resp) {
+    function(resp) {
       if (!resp.code) {
         google.appengine.samples.hello.print(resp);
       }
     });
 };
 
+/**
+ * Lists greetings via the API.
+ */
+ google.appengine.samples.hello.productList = function () {
+  gapi.client.myapi.mymodel.list().execute(
+    function(resp) {
+      if (!resp.code) {
+        resp.items = resp.items || [];
+        for (var i = 0; i < resp.items.length; i++) {
+          console.log(resp.items[i]);
+          google.appengine.samples.hello.print(resp.items[i]);
+        }
+      }
+    });
+};
 
-function converbtoa(){
+// myapi.mymodel.insert
+google.appengine.samples.hello.insert = function (productname,category,offerprice,usualprice,doe,productimg) {
+  gapi.client.myapi.mymodel.insert({
+    'productname':productname,
+    'category':category,
+    'offerprice':offerprice,
+    'usualprice':usualprice,
+    'doe':doe,
+    'productimg':productimg
+  }).execute(function(resp) {
+    if (!resp.code) {
+      google.appengine.samples.hello.print(resp);
+    }
+  });
+};
+
+
+function converbtoa (){
   file=document.querySelector("#productimg").files[0];
   var reader=new FileReader();
   reader.onload=function(e){
     var rawData=reader.result;
-  }
+  };
   reader.removeAttr(file);
 }
 
 /**
  * Enables the button callbacks in the UI.
  */
-google.appengine.samples.hello.enableButtons = function() {
-  var getProductByID = document.querySelector('#a-success');
-  getProductByID.addEventListener('click', function(e) {
-    google.appengine.samples.hello.getProductByID(
-        document.querySelector('#offerprice').value);
+ google.appengine.samples.hello.enableButtons = function () {
+  // var getProductByID = document.querySelector('#a-success');
+  // getProductByID.addEventListener('click', function(e) {
+  //   google.appengine.samples.hello.getProductByID(
+  //       document.querySelector('#offerprice').value);
+  // });
+
+var insertProduct = document.querySelector('#b-success');
+if (insertProduct !==null){
+  insertProduct.addEventListener('click',function (){
+    var productname=document.querySelector('#productname').value;
+    var category=document.querySelector('#category').value;
+    var offerprice=document.querySelector('#offerprice').value;
+    var usualprice=document.querySelector('#usualprice').value;
+    var doe=document.querySelector('#doe').value;
+
+    p=productimage;
+    google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe,p);
   });
+  
+}
 
-  var insertProduct = document.querySelector('#b-success');
-  insertProduct.addEventListener('click',function(){
-      var productname=document.querySelector('#productname').value;
-      var category=document.querySelector('#category').value;
-      var offerprice=document.querySelector('#offerprice').value;
-      var usualprice=document.querySelector('#usualprice').value;
-      var doe=document.querySelector('#doe').value;
-
-      // file=document.querySelector('#productimg').files[0];
-      // var reader = new FileReader();
-      // reader.onload = (function(theFile){
-      //     var fileName = theFile.name;
-      //     productimg=reader.result;
-      //     return function(e){
-      //         console.log(fileName);
-      //     };
-      // })(file);   
-      // reader.readAsDataURL(file);
-      // file=document.querySelector("#productimg").files[0];
-
-      // var reader = new FileReader();
-
-      // reader.onload = function(e) {
-      //   var rawData = reader.result;
-      // }
-      
-
-      // reader.readAsBinaryString(file);
-      p=productimage;
-      // // convert to base 64 to send via endpoints
-      // productimg=btoa(reader.result);
-
-      google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe,p)
-    });
-
-  var signinButton = document.querySelector('#signinButton');
-  signinButton.addEventListener('click', google.appengine.samples.hello.auth);
+var signinButton = document.querySelector('#signinButton');
+signinButton.addEventListener('click', google.appengine.samples.hello.auth);
 
 };
 /**
  * Initializes the application.
  * @param {string} apiRoot Root of the API's path.
  */
-google.appengine.samples.hello.init = function(apiRoot) {
+ google.appengine.samples.hello.init = function (apiRoot) {
   // Loads the OAuth and helloworld APIs asynchronously, and triggers login
   // when they have completed.
   var apisToLoad;
-  var callback = function() {
-    if (--apisToLoad == 0) {
+  var callback = function () {
+    if (--apisToLoad === 0) {
       google.appengine.samples.hello.enableButtons();
       google.appengine.samples.hello.signin(true,
-          google.appengine.samples.hello.userAuthed);
+        google.appengine.samples.hello.userAuthed);
+      if (window.location.pathname == '/'){
+        google.appengine.samples.hello.productList();
+      }
     }
-  }
+  };
 
   apisToLoad = 2; // must match number of calls to gapi.client.load()
   gapi.client.load('myapi', 'v1', callback, apiRoot);
@@ -221,12 +203,16 @@ google.appengine.samples.hello.init = function(apiRoot) {
 
 var productimage;
 window.onload = function(){
-        
+    
+
+
     //Check File API support
     if(window.File && window.FileList && window.FileReader)
     {
         var filesInput = document.getElementById("productimg");
         
+        if (filesInput !== null){
+
         filesInput.addEventListener("change", function(event){
             
             var files = event.target.files; //FileList object
@@ -256,10 +242,12 @@ window.onload = function(){
                 
                  //Read the image
                 picReader.readAsBinaryString(file);
-            });   
+        });   
+
+        }
     }
     else
     {
         console.log("Your browser does not support File API");
     }
-}
+};
