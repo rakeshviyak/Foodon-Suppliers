@@ -1,23 +1,67 @@
 {% extends "base.html" %}
-
 {% block body %}
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <img class="img-responsive" src="/static/img/rajini.gif" alt="">
-                    <div class="intro-text">
-                        <span class="name">RAJINI</span>
-                        <hr class="star-light">
-                        <span class="skills">The Shop Owner </span>
-                    </div>
-                    <div>Shop Location:</div>
-
-                </div>
+<div class="container signature" style="margin-top:40px;">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="intro-text">
+                <span class="name">{{ response['name'] }} </span>
+                <hr class="star-light">
+            </div>
         </div>
-    </header>
-                    <img class="img-responsive" src="/static/img/address.jpg" alt="">
+        <div id="profileID" title="{{ response['id'] }}"></div>
+        <div id="geolocation" title=""></div>
+        <div class="col-lg-12">
+        <form name="sentMessage" id="contactForm" novalidate>
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop Name</label>
+                <input type="text" class="form-control" placeholder="Shop Name" id="shopname" required data-validation-required-message="Shop Name" value="{{ response['shopname'] }}">
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop Registration Number</label>
+                <input type="text" class="form-control" placeholder="Shop Registration Number" id="regno" required data-validation-required-message="Shop Registration Number" style=":-webkit-input-placeholder { color: white; }" value="{{ response['regno'] }}">
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop Description</label>
+                <textarea class="form-control" placeholder="Shop description" id="shopdescription" required data-validation-required-message="Shop description">{{ response['shopdescription'] }}</textarea>
+                <p class="help-block text-danger"></p>
+            </div>            
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop Address</label>
+                <textarea class="form-control" placeholder="Shop Address" id="shopaddress" required data-validation-required-message="Shop Address">{{ response['address'] }}</textarea>
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+                <label>Pincode</label>
+                <input type="number" class="form-control" placeholder="Pincode" id="pincode" required data-validation-required-message="Pincode" value="{{ response['pincode'] }}" onchange="codeAddress()">
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop Start Time</label>
+                <input type="time" class="form-control" placeholder="Shop Start Time" id="starttime" required data-validation-required-message="Start Time" value="{{ response['starttime'] }}">
+                <p class="help-block text-danger"></p>
+            </div>
+            <div class="form-group floating-label-form-group controls">
+                <label>Shop End Time</label>
+                <input type="time" class="form-control" placeholder="Shop End Time" id="endtime" required data-validation-required-message="End Time" value="{{ response['endtime'] }}">
+                <p class="help-block text-danger"></p>
+            </div>
+        </form>
+        </div>
+        <div class="col-lg-8 col-lg-offset-2 text-center">
+            <a href="#" id="seller-submit" class="btn btn-lg btn-outline">
+                Save  
+            </a>
+        </div>
+        <div class="col-lg-12" id="map-canvas" style="margin-top:20px; height:450px;"></div>
+    </div>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=TRUE">
+</script>
+<script type="text/javascript" src="/static/js/maps.js">
+</script>
+
 
 
 

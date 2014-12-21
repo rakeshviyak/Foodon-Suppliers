@@ -1,11 +1,6 @@
-/*!
- * Start Bootstrap - Freelancer Bootstrap Theme (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
 body {
     overflow-x: hidden;
+    background: none repeat scroll 0% 0% #18BC9C;
 }
 
 p {
@@ -79,23 +74,22 @@ hr.star-primary:after {
     margin: 0 auto;
 }
 
-header {
+.signature {
     text-align: center;
     color: #fff;
-    background: #18bc9c;
 }
 
-header .container {
+.signature {
     padding-top: 20px;
     padding-bottom: 15px;
 }
 
-header img {
+.signature img {
     display: block;
     margin: 0 auto 0px;
 }
 
-header .intro-text .name {
+.signature .intro-text .name {
     display: block;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -103,23 +97,23 @@ header .intro-text .name {
     font-weight: 700;
 }
 
-header .intro-text .skills {
+.signature .intro-text .skills {
     font-size: 1.25em;
     font-weight: 300;
     font-style: italic;
 }
 
 @media(min-width:768px) {
-    header .container {
+    .signature {
         padding-top: 100px;
         padding-bottom: 100px;
     }
 
-    header .intro-text .name {
+    .signature .intro-text .name {
         font-size: 4.75em;
     }
 
-    header .intro-text .skills {
+    .signature .intro-text .skills {
         font-size: 1.75em;
     }
 }
@@ -469,19 +463,19 @@ footer .footer-below {
 }
 
 .container{
-    padding: 15px;
+    /*padding: 15px;*/
     color:#FFFFFF;
 }
 
-.usual-price{
+.usual-price {
     color:#C7D0D9;
     text-decoration: line-through;    
 }
 
-.offer-price{
+.offer-price {
     padding-left: 3px;
 }
-.doe{
+.doe {
     /*text-align: right;*/
     font-size: 12px;
     float: right !important;
@@ -495,7 +489,7 @@ footer .footer-below {
 .latest img { width: 100%; height: 100%; }
 section { width: 50%; float: left; }
 
-.album header { margin: 0 0 1em; }
+.album .signature { margin: 0 0 1em; }
 .album h1 { display: inline; }
 .photos { clear: left; }
 .photo { position: relative; display: block; float: left; 
@@ -521,6 +515,11 @@ section { width: 50%; float: left; }
   z-index: 20;
 }
 
-.p-btn{
+.p-btn {
     color: black;
 }
+
+.hidden {
+    visibility: hidden;
+}
+

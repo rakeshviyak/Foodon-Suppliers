@@ -41,12 +41,46 @@
  google.appengine.samples.hello.userAuthed = function () {
   var request = gapi.client.oauth2.userinfo.get().execute(function(resp) {
     if (!resp.code) {
+      var signinButton = document.querySelector('#signinButton');
+      var logoutButton = document.querySelector('#logoutButton');
+      var profileButton = document.querySelector('#profileButton');
       google.appengine.samples.hello.signedIn = true;
-      document.querySelector('#signinButton').textContent = resp.name;
+      signinButton.textContent = resp.name;
+      signinButton.innerHTML += ' <span class="caret"></span>';
+      google.appengine.samples.hello.sellerprofileInsert(resp);
+
+      signinButton.removeEventListener('click', google.appengine.samples.hello.auth);
+      document.getElementById("signinDropdown").className = 
+        document.getElementById("signinDropdown").className.replace(/\bhidden\b/,'');
+      logoutButton.addEventListener('click', google.appengine.samples.hello.auth);
+      profileButton.href="/seller/"+resp.id;
     }
   });
 };
 
+google.appengine.samples.hello.sellerprofileInsert = function(resp){
+  gapi.client.myapi.sellerprofile.list({
+    'sellerid':resp.id
+  }).execute(function(response){
+    if(!response.items){
+      gapi.client.myapi.sellerprofile.insert({
+        'sellerid':resp.id,
+        'name':resp.name,
+        'email':resp.email,
+        'link':resp.link,
+        'picture':resp.picture,
+        'gender':resp.gender
+      }).execute(function(resp){
+        if(!resp.code){
+          console.log(resp);
+        } 
+      });
+    }
+    else{
+      console.log("Seller already added");
+    }
+  });
+};
 
 /**
  * Handles the auth flow, with the given value for immediate mode.
@@ -59,9 +93,6 @@
     callback);
 };
 
-
-
-
 /**
  * Presents the user with the authorization popup.
  */
@@ -71,12 +102,13 @@
       google.appengine.samples.hello.userAuthed);
   } else {
     google.appengine.samples.hello.signedIn = false;
-    document.querySelector('#signinButton').textContent = 'Sign in';
+    var s = document.querySelector('#signinButton');
+    s.textContent = 'Sign in';
+    s.addEventListener('click', google.appengine.samples.hello.auth);
+    var d = document.querySelector('#signinDropdown');
+    d.classname += ' hidden';
   }
 };
-
-
-
 
 
 /**
@@ -151,31 +183,51 @@ function converbtoa (){
 /**
  * Enables the button callbacks in the UI.
  */
- google.appengine.samples.hello.enableButtons = function () {
-  // var getProductByID = document.querySelector('#a-success');
-  // getProductByID.addEventListener('click', function(e) {
-  //   google.appengine.samples.hello.getProductByID(
-  //       document.querySelector('#offerprice').value);
-  // });
+google.appengine.samples.hello.enableButtons = function () {
 
-var insertProduct = document.querySelector('#b-success');
-if (insertProduct !==null){
-  insertProduct.addEventListener('click',function (){
-    var productname=document.querySelector('#productname').value;
-    var category=document.querySelector('#category').value;
-    var offerprice=document.querySelector('#offerprice').value;
-    var usualprice=document.querySelector('#usualprice').value;
-    var doe=document.querySelector('#doe').value;
+  var insertProduct = document.querySelector('#b-success');
+  if (insertProduct !==null){
+    insertProduct.addEventListener('click',function (){
+      var productname=document.querySelector('#productname').value;
+      var category=document.querySelector('#category').value;
+      var offerprice=document.querySelector('#offerprice').value;
+      var usualprice=document.querySelector('#usualprice').value;
+      var doe=document.querySelector('#doe').value;
 
-    p=productimage;
-    google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe,p);
-  });
-  
-}
+      p=productimage;
+      google.appengine.samples.hello.insert(productname,category,offerprice,usualprice,doe,p);
+    });
+  }
 
-var signinButton = document.querySelector('#signinButton');
-signinButton.addEventListener('click', google.appengine.samples.hello.auth);
-
+  var sellerSubmit = document.querySelector('#seller-submit');
+  if (sellerSubmit !== null){
+    sellerSubmit.addEventListener('click',function(){
+      var profileID=document.querySelector('#profileID').title;
+      var shopname=document.querySelector('#shopname').value;
+      var regno=document.querySelector('#regno').value;
+      var shopdescription=document.querySelector('#shopdescription').value;
+      var shopaddress=document.querySelector('#shopaddress').value;
+      var pincode=document.querySelector('#pincode').value;
+      var starttime=document.querySelector('#starttime').value;
+      var endtime=document.querySelector('#endtime').value;
+      var location=getGeocode(pincode);
+      gapi.client.myapi.sellerprofile.insert({
+        'id':profileID,
+        'shopname':shopname,
+        'regno':regno,
+        'shopdescription':shopdescription,
+        'address':shopaddress,
+        'pincode':pincode,
+        'location':location,
+        'starttime':starttime,
+        'endtime':endtime
+      }).execute(function(resp) {
+        console.log(resp);
+      });
+    });
+  }
+  var signinButton = document.querySelector('#signinButton');
+  signinButton.addEventListener('click', google.appengine.samples.hello.auth);
 };
 /**
  * Initializes the application.
@@ -204,8 +256,6 @@ signinButton.addEventListener('click', google.appengine.samples.hello.auth);
 var productimage;
 window.onload = function(){
     
-
-
     //Check File API support
     if(window.File && window.FileList && window.FileReader)
     {

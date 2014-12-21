@@ -42,17 +42,12 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/static/js/bootstrap.min.js"></script>
-
-<!--     Plugin JavaScript 
-    <script src="/static/js/cbpAnimatedHeader.js"></script>
- -->
-    <!-- Contact Form JavaScript -->
-
     <script src="/static/js/jqBootstrapValidation.js"></script>
     <script src="/static/js/contact_me.js"></script>
     <script src="/static/js/api_query.js"></script>
-    <script type="text/javascript"> google.appengine.samples.hello.CLIENT_ID = '{{ Client_ID }}';</script>
-
+    <script type="text/javascript"> 
+      google.appengine.samples.hello.CLIENT_ID = '{{ Client_ID }}';
+    </script>
     <script src="/static/js/base64.js"></script>
     <script>
         function init() {
@@ -92,12 +87,10 @@
           </form>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-    <!-- <a href="javascript:void(0);" class="btn btn-lg btn-outline" >Sign in</a> -->
-
-              <a href="javacript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="signinButton">Sign in <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="/profile">Settings</a></li>
-                <li><a href="#">Logout</a></li>
+              <a href="javacript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" id="signinButton">Sign in</a>
+              <ul class="dropdown-menu hidden" id="signinDropdown" role="menu">
+                <li><a href="/profile" id="profileButton">Profile</a></li>
+                <li><a href="#" id="logoutButton">Logout</a></li>
               </ul>
             </li>
           </ul>

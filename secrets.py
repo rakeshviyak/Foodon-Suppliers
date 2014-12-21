@@ -7,6 +7,7 @@
 
 import os
 import logging
+
 CURRENT_VERSION_ID = os.environ.get('CURRENT_VERSION_ID', None)
 if os.environ.get('SERVER_SOFTWARE', '').startswith('Google App Engine'):
     DEVELOPMENT = False
@@ -16,8 +17,9 @@ else:
 PRODUCTION = not DEVELOPMENT
 DEBUG = DEVELOPMENT
 
-
-logging.error(DEVELOPMENT)
+API_NAME = 'myapi'
+API_VERSION = 'v1'
+API_DESCRIPTITON = 'Foodon API'
 
 SESSION_KEY = "a very long and secret session key goes here asjhgsd kjagshfhjsd jhgsad"
 
